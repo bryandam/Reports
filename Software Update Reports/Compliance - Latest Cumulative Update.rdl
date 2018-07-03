@@ -53,7 +53,7 @@ Select CollectionMembers.ResourceID,
                                  ORDER BY UpdateCompliance.Status DESC) AS RowNumber
 From
 (
-	Select vFCM.ResourceID, vFCM.Name, ISNULL(LTRIM(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace( Case WHEN PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) &gt; 0 Then SUBSTRING(Caption0,1,PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) - 1) + 'LTSB'  Else Caption0 End, '®',''), 'Enterprise',''), 'Microsoft',''),'Standard',''),'Datacenter',''),'Professional',''), ' N ',' '), '  ',' '))),'OS Not Found') As OperatingSystem, 	
+	Select vFCM.ResourceID, vFCM.Name, ISNULL(LTRIM(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace( Case WHEN PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) &gt; 0 Then SUBSTRING(Caption0,1,PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) - 1) + 'LTSB'  Else Caption0 End, '®',''), 'Enterprise',''), 'Microsoft',''),'Standard',''),'Datacenter',''),'Professional',''),'Storage',''), ' N ',' '), '  ',' '))),'OS Not Found') As OperatingSystem, 	
 	CASE 
 		WHEN vGOS.ProductType0 = 1 THEN 'Workstation'
 		WHEN vGOS.ProductType0 = 2 THEN 'Server'
@@ -64,7 +64,7 @@ From
 	Left Join v_GS_OPERATING_SYSTEM vGOS
 		On vFCM.ResourceID = vGOS.ResourceID
 	WHERE vFCM.CollectionID=@CollectionID
-	 And ISNULL(LTRIM(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace( Case WHEN PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) &gt; 0 Then SUBSTRING(Caption0,1,PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) - 1) + 'LTSB'  Else Caption0 End, '®',''), 'Enterprise',''), 'Microsoft',''),'Standard',''),'Datacenter',''),'Professional',''), ' N ',' '), '  ',' '))),'OS Not Found') Like @OperatingSystem
+	 And ISNULL(LTRIM(RTRIM(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace( Case WHEN PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) &gt; 0 Then SUBSTRING(Caption0,1,PATINDEX('%[0-9][0-9][0-9][0-9] LTSB%',Caption0) - 1) + 'LTSB'  Else Caption0 End, '®',''), 'Enterprise',''), 'Microsoft',''),'Standard',''),'Datacenter',''),'Professional',''),'Storage',''), ' N ',' '), '  ',' '))),'OS Not Found') Like @OperatingSystem
 ) CollectionMembers
 
 Left Join
@@ -322,7 +322,7 @@ Order By OperatingSystem</CommandText>
                             <Drillthrough>
                               <ReportName>Compliance - Latest Cumulative Update</ReportName>
                               <Parameters>
-                                <Parameter Name="UpdateState">
+                                <Parameter Name="UpdateStates">
                                   <Value>=Fields!Status.Value</Value>
                                 </Parameter>
                                 <Parameter Name="Period">
@@ -354,7 +354,7 @@ Order By OperatingSystem</CommandText>
                               <Drillthrough>
                                 <ReportName>Compliance - Latest Cumulative Update</ReportName>
                                 <Parameters>
-                                  <Parameter Name="UpdateState">
+                                  <Parameter Name="UpdateStates">
                                     <Value>=Fields!Status.Value</Value>
                                   </Parameter>
                                   <Parameter Name="Period">
